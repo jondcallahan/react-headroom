@@ -6,6 +6,9 @@
   "bugs": {
     "url": "https://github.com/jondcallahan/react-headroom/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
     "raf": "^3.3.0",
