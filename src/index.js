@@ -52,7 +52,7 @@ export default class Headroom extends Component {
     this.setHeightOffset()
     if (!this.props.disable) {
       this.props.parent().addEventListener('scroll', this.handleScroll)
-      this.props.parent().addEventListener('scroll', debounce(this.setHeightOffset, 100))
+      this.props.parent().addEventListener('resize', this.handleResize)
     }
   }
 
@@ -60,8 +60,10 @@ export default class Headroom extends Component {
     if (nextProps.disable && !this.props.disable) {
       this.unfix()
       this.props.parent().removeEventListener('scroll', this.handleScroll)
+      this.props.parent().removeEventListener('resize', this.handleResize)
     } else if (!nextProps.disable && this.props.disable) {
       this.props.parent().addEventListener('scroll', this.handleScroll)
+      this.props.parent().addEventListener('resize', this.handleResize)
     }
   }
 
@@ -82,6 +84,9 @@ export default class Headroom extends Component {
   componentWillUnmount () {
     this.props.parent().removeEventListener('scroll', this.handleScroll)
     window.removeEventListener('scroll', this.handleScroll)
+
+    this.props.parent().removeEventListener('resize', this.handleResize)
+    window.removeEventListener('resize', this.handleResize)
   }
 
   setHeightOffset = () => {
@@ -153,6 +158,13 @@ export default class Headroom extends Component {
     const pastBottom = currentScrollY + scrollerPhysicalHeight > scrollerHeight
 
     return pastTop || pastBottom
+  }
+
+  handleResize = () => {
+    debounce(
+      this.setHeightOffset(),
+      100
+    )
   }
 
   handleScroll = () => {
