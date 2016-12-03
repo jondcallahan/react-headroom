@@ -1,7 +1,7 @@
 {
   "name": "@jondcallahan/react-headroom",
   "description": "Hide your header until you need it. React.js port of headroom.js",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "author": "Jon Callahan <npm@joncallahan.co>",
   "bugs": {
     "url": "https://github.com/jondcallahan/react-headroom/issues"
