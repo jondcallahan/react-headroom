@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react' // eslint-disable-line import/no-unresolved
 import shallowequal from 'shallowequal'
 import raf from 'raf'
+import debounce from 'lodash.debounce'
 import shouldUpdate from './shouldUpdate'
 
 const noop = () => {}
@@ -51,6 +52,7 @@ export default class Headroom extends Component {
     this.setHeightOffset()
     if (!this.props.disable) {
       this.props.parent().addEventListener('scroll', this.handleScroll)
+      this.props.parent().addEventListener('scroll', debounce(this.setHeightOffset, 100))
     }
   }
 
