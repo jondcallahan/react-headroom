@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react' // eslint-disable-line import/no-unresolved
 import shallowequal from 'shallowequal'
 import raf from 'raf'
-import debounce from 'lodash.debounce'
 import shouldUpdate from './shouldUpdate'
 
 const noop = () => {}
@@ -17,9 +16,9 @@ export default class Headroom extends Component {
     onPin: PropTypes.func,
     onUnpin: PropTypes.func,
     onUnfix: PropTypes.func,
-    wrapperStyle: PropTypes.object,
+    wrapperStyle: PropTypes.shape({}),
     pinStart: PropTypes.number,
-    style: PropTypes.object,
+    style: PropTypes.shape({}),
   };
 
   static defaultProps = {
@@ -161,7 +160,7 @@ export default class Headroom extends Component {
   }
 
   handleResize = () => {
-    debounce(this.setHeightOffset, 100)
+    this.setHeightOffset()
   }
 
   handleScroll = () => {
