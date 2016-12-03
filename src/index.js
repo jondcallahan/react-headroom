@@ -161,10 +161,7 @@ export default class Headroom extends Component {
   }
 
   handleResize = () => {
-    debounce(
-      this.setHeightOffset(),
-      100
-    )
+    debounce(this.setHeightOffset, 100)
   }
 
   handleScroll = () => {
